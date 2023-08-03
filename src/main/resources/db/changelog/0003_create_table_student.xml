@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0001-1" author="RobertKusz">
+        <createTable tableName="student">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="first_name" type="VARCHAR(100)"/>
+            <column name="last_name" type="VARCHAR(100)"/>
+            <column name="pesel" type="VARCHAR(11)">
+                <constraints unique="true"/>
+            </column>
+            <column name="login" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="student_subjects">
+            <column name="student_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_student_subject_student_id"
+                             referencedTableName="student"
+                             referencedColumnNames="id"
+                             primaryKey="true"
+                             primaryKeyName="pk_student_subject"
+                />
+            </column>
+
+            <column name="subject_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_student_subject_subject_id"
+                             referencedTableName="subject"
+                             referencedColumnNames="id"
+                             primaryKey="true"
+                             primaryKeyName="pk_student_subject"
+                />
+            </column>
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>

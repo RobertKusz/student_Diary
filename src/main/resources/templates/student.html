@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${student.firstName}">Imie Nazwisko</title>
+</head>
+<body>
+  <main class="student-info" layout:fragment="content">
+      <h2 th:text="|${student.firstName} ${student.lastName}|">Imie Nazwisko</h2>
+
+      <ul class="grade-per-subject-table">
+          <li class="grades-info" th:each="subject : ${student.subjects}">
+              <div class="grades-info-subject">
+                  <a>
+                      <div class="grades-info-subject-name" th:text="${subject.name}">
+                          test
+                      </div>
+                  </a>
+                  <div class="grades-table" >
+                          <a class="grade"
+                               th:if="${subject.id} == ${grade.subject.id}"
+                               th:each="grade : ${allGrades}"
+                               th:href="@{|/student/${student.id}/grade/${grade.id}|}">
+                                  <span th:text="${grade.gradeValue}"  ></span>
+                          </a>
+                  </div>
+              </div>
+
+          </li>
+      </ul>
+  </main>
+</body>
+</html>

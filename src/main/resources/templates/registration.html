@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Rejestracja</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <p>Wybierz kogo chcesz zarejestrować</p>
+    <ul>
+        <li class="register-choose">
+            <a th:href="@{/rejestracja/nauczyciel}">
+                Nauczyciel
+            </a>
+        </li>
+        <li class="register-choose" th:href="@{/rejestracja/uczen}">
+            <a th:href="@{/rejestracja/uczen}">
+                Uczeń
+            </a>
+        </li>
+    </ul>
+</main>
+</body>
+</html>

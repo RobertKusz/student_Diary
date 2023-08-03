@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <h1>Formularz rejestracji</h1>
+    <form action="#" th:action="@{/rejestracja/uczen}" method="post" class="" th:object="${student}">
+        <label for="firstName">Imię:</label>
+        <input type="text" id="firstName" name="firstName" required>
+
+        <label for="lastName">Nazwisko:</label>
+        <input type="text" id="lastName" name="lastName" required>
+
+        <label for="pesel">pesel:</label>
+        <input type="text" id="pesel" name="pesel" required>
+
+        <p>Przedmioty</p>
+        <p th:each="subject: ${subjects}">
+            <label th:for="${subject.name}" th:text="${subject.name}">Przedmioty</label>
+            <input type="checkbox" th:id="${subject.name}" name="subject" class="subject" th:value="${subject.id}" >
+        </p>
+
+        <label for="login">Login:</label>
+        <input type="text" id="login" name="login" required>
+
+        <label for="password">Hasło:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Zarejestruj się</button>
+    </form>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${heading}">Tytuł test</title>
+</head>
+<body>
+  <main layout:fragment="content">
+        <ul class="info">
+          <li class="info-item">Identyfikator ucznia</li>
+          <li class="info-item">Imie</li>
+          <li class="info-item">Nazwisko</li>
+          <li class="info-item">Średnia ocen</li>
+        </ul>
+
+
+          <a href="#" th:href="@{|/student/${student.id}|}" th:each="student : ${students}" class="link-to-student">
+            <ul class="student-list">
+               <li th:text="${student.id}" class="student-list-item"> Identyfikator ucznia</li>
+               <li th:text="${student.firstName}" class="student-list-item"> test</li>
+               <li th:text="${student.lastName}" class="student-list-item">test</li>
+               <li th:text="${avgGrade[student.id]}" class="student-list-item">test</li>
+            </ul>
+          </a>
+
+  </main>
+
+
+</body>
+</html>
