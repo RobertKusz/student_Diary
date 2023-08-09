@@ -1,10 +1,34 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Usuwanie oceny</title>
 </head>
 <body>
-$END$
+<main layout:fragment="content">
+    <ul class="grade-per-subject-table">
+        <li class="grades-info" th:each="subject : ${student.subjects}">
+            <div class="grades-info-subject">
+                <a>
+                    <div class="grades-info-subject-name" th:text="${subject.name}">
+                        test
+                    </div>
+                </a>
+                <div class="grades-table" >
+                    <a class="grade"
+                       th:if="${subject.id} == ${grade.subject.id}"
+                       th:each="grade : ${allGrades}"
+                       th:href="@{|/panel-nauczyciela/usuwanie-oceny/${student.id}/${grade.id}|}">
+                        <span th:text="${grade.gradeValue}"  ></span>
+                    </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</main>
+
 </body>
 </html>

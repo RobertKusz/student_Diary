@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Usuwanie oceny</title>
 </head>
 <body>
-$END$
+<main layout:fragment="content">
+    <form id="deleteGradeForm"
+          th:action="@{/panel-nauczyciela/usuwanie-oceny/{studentId}/{gradeId}(studentId=${studentId},
+           gradeId=${gradeId})}"
+          action=""
+          method="post" >
+        <p>Czy na pewno chcesz usunąć obiekt grade?</p>
+        <input type="hidden" id="gradeId" name="gradeId" th:value="${gradeId}">
+        <button type="submit">Tak, usuń</button>
+        <button type="button" >Nie, anuluj</button>
+    </form>
+
+</main>
 </body>
 </html>

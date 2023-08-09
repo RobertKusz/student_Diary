@@ -52,13 +52,18 @@ main{
 }
 .diary-content{
     float: left;
-    width: 70%;
+    width: 580px;
+    padding: 10px;
     background-color: #555555;
 }
-.diary-info{
-    float: left;
-    width: 30%;
+.diary-info {
+    float: right;
+    width: 380px;
     background-color: #666666;
+    padding: 10px;
+}
+.diary-info>p{
+    font-size: 2rem;
 }
 
 /*/ students-list /*/
@@ -191,4 +196,24 @@ button, select, textarea, input,option{
     text-align: center;
     font-size: 1.5rem;
 
+}
+/*REGISTRATION*/
+.registration-choice{
+    list-style-type: none;
+}
+/*TEACHER PANEL*/
+.teacher-panel-list{
+    list-style-type: none;
+}
+.teacher-panel-choose:hover{
+    color: #333333;
+}
+/*DELETE GRADE*/
+.delete-grade-lint-to-student{
+    width: 999px;
+    text-decoration: none;
+}
+.delete-grade-student-list-item{
+    width: 333px;
+    border-bottom: black 1px solid;
 }

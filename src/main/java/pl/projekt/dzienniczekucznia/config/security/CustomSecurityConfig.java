@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -18,9 +19,10 @@ public class CustomSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests((auhtz) -> auhtz
-                .requestMatchers("/panel-nauczyciela/nowa-ocena/..").hasRole(TEACHER_ROLE)
+                .requestMatchers("/panel-nauczyciela/**").hasRole(TEACHER_ROLE)
+                .requestMatchers("/usun/{gradeId}").hasRole(TEACHER_ROLE)
                 .requestMatchers("/spis-studentow").authenticated()
-                .requestMatchers("/student/..").authenticated()
+                .requestMatchers("/student/**").authenticated()
                 .anyRequest().permitAll()
         )
                 .formLogin(login -> login
@@ -30,6 +32,7 @@ public class CustomSecurityConfig {
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout", HttpMethod.GET.name()))
                 );
         http.csrf().ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"));
+        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
         http.headers().frameOptions().sameOrigin();
         return http.build();
     }

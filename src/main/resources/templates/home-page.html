@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="https://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}"
->
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Dzienniczek ucznia</title>
@@ -10,13 +10,21 @@
 <body>
   <main class="main_content" layout:fragment="content">
       <div class="diary-content">
-          napis
+          <h1>Dzień dobry
+              <span sec:authorize="hasRole('TEACHER')">i miłej pracy</span>
+              <span sec:authorize="hasRole('STUDENT')">i miłej nauki</span>
+          </h1>
 
       </div>
       <div class="diary-info">
-          napis 2
+          <h2>
+              Aktualna temperatura
+          </h2>
+          <p>
+              <span th:text="${temperature}"></span>
+              <i class="fa-solid fa-temperature-full"  th:class="|fa-solid fa-temperature-${thermometerValue}|"></i>
+          </p>
       </div>
   </main>
-</div>
 </body>
 </html>

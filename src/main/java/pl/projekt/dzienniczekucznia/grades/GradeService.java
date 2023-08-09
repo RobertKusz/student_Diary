@@ -68,4 +68,10 @@ public class GradeService {
         gradeToSave.setSubject(subject);
         gradeRepository.save(gradeToSave);
     }
+
+    @Transactional
+    public void deleteGradeById(Long gradeId) {
+        gradeRepository.deleteById(gradeId);
+        System.out.println(gradeId);
+    }
 }

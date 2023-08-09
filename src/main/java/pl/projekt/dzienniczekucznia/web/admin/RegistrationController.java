@@ -67,7 +67,6 @@ public class RegistrationController {
     @PostMapping("/rejestracja/uczen")
     public String registerStudent(StudentRegistrationDto studentRegistration,
                                   @RequestParam(value = "subject",required = false) Long[] selectedSubjectsIds){
-//        List<SubjectDto> selectedSubjects = selectedSubjectsIds.stream().map(subjectService::getSubjectById).toList();
         studentService.registerStudent(studentRegistration, selectedSubjectsIds);
         return "redirect:/";
     }

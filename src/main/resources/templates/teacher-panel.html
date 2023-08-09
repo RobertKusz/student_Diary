@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Panel nauczyciela</title>
 </head>
 <body>
-$END$
+<main layout:fragment="content">
+    <ul class="teacher-panel-list">
+        <li class="teacher-panel-choose">
+            <a th:href="@{/panel-nauczyciela/nowa-ocena}">
+                Dodaj ocene
+            </a>
+        </li>
+        <li class="teacher-panel-choose">
+            <a th:href="@{/panel-nauczyciela/usuwanie-oceny}">
+                Usuń ocene
+            </a>
+        </li>
+        <li class="teacher-panel-choose">
+            <a th:href="@{panel-nauczyciela/nowa-uwaga}">
+                Wstaw uwagę
+            </a>
+        </li>
+        <li class="teacher-panel-choose">
+            <a  th:href="@{panel-nauczyciela/nowy-sprawdzian}">
+                Dodaj nowy sprawdzian
+            </a>
+        </li>
+    </ul>
+</main>
 </body>
 </html>
