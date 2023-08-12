@@ -3,6 +3,9 @@ package pl.projekt.dzienniczekucznia.student;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.projekt.dzienniczekucznia.behavioralNote.BehavioralNoteDtoMapper;
+import pl.projekt.dzienniczekucznia.behavioralNote.BehavioralNoteRepository;
+import pl.projekt.dzienniczekucznia.behavioralNote.dto.BehavioralNoteDto;
 import pl.projekt.dzienniczekucznia.student.dto.StudentDto;
 import pl.projekt.dzienniczekucznia.student.dto.StudentRegistrationDto;
 import pl.projekt.dzienniczekucznia.subject.Subject;
@@ -20,11 +23,13 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final PasswordEncoder passwordEncoder;
     private final SubjectService subjectService;
+    private final BehavioralNoteRepository behavioralNoteRepository;
 
-    public StudentService(StudentRepository studentRepository, PasswordEncoder passwordEncoder, SubjectService subjectService) {
+    public StudentService(StudentRepository studentRepository, PasswordEncoder passwordEncoder, SubjectService subjectService, BehavioralNoteRepository behavioralNoteRepository) {
         this.studentRepository = studentRepository;
         this.passwordEncoder = passwordEncoder;
         this.subjectService = subjectService;
+        this.behavioralNoteRepository = behavioralNoteRepository;
     }
 
     public long getUserNumber(){
@@ -89,4 +94,12 @@ public class StudentService {
         }
         return thermometerValue;
     }
+    public List<BehavioralNoteDto> getBehavioralNotes(){
+
+        return behavioralNoteRepository.findAll()
+                .stream()
+                .map(BehavioralNoteDtoMapper::map)
+                .toList();
+    }
+
 }

@@ -1,6 +1,8 @@
 package pl.projekt.dzienniczekucznia.web;
 
 import org.json.simple.JSONObject;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,8 @@ public class HomeController {
     public String home(Model model){
         long userNumber = studentService.getUserNumber();
         Optional<Double> temperatureOptional = weatherService.getWeatherTemperature();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         if (temperatureOptional.isPresent()) {
             Double temperature = temperatureOptional.get();
             String thermometer = studentService.getThermometerValue(temperature);
@@ -34,6 +38,7 @@ public class HomeController {
         }
 
         model.addAttribute("studentNumber", userNumber);
+        model.addAttribute("principal", authentication.getName());
         return "home-page";
     }
 }

@@ -1,23 +1,19 @@
-package pl.projekt.dzienniczekucznia.behavioralNote;
-
-import jakarta.persistence.*;
+package pl.projekt.dzienniczekucznia.behavioralNote.dto;
 import pl.projekt.dzienniczekucznia.student.Student;
-import pl.projekt.dzienniczekucznia.subject.Subject;
 import pl.projekt.dzienniczekucznia.teacher.Teacher;
 
-@Entity
-public class BehavioralNote {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BehavioralNoteDto {
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
-
-    @ManyToOne
-    @JoinColumn(name = "student_id")
     private Student student;
     private String description;
+
+    public BehavioralNoteDto(Long id, Teacher teacher, Student student, String description) {
+        this.id = id;
+        this.teacher = teacher;
+        this.student = student;
+        this.description = description;
+    }
 
     public Long getId() {
         return id;

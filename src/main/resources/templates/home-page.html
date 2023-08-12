@@ -11,8 +11,9 @@
   <main class="main_content" layout:fragment="content">
       <div class="diary-content">
           <h1>Dzień dobry
-              <span sec:authorize="hasRole('TEACHER')">i miłej pracy</span>
-              <span sec:authorize="hasRole('STUDENT')">i miłej nauki</span>
+              <span th:text="${principal}" sec:authorize="hasAnyRole('TEACHER','STUDENT')"></span>
+              <span sec:authorize="hasRole('TEACHER')">  miłej pracy</span>
+              <span sec:authorize="hasRole('STUDENT')">  miłej nauki</span>
           </h1>
 
       </div>

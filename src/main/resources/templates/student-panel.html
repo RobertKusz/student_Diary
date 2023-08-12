@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${student.firstName}">Imie</title>
+</head>
+<body>
+  <main class="student-info" layout:fragment="content">
+      <div class="student-panel-content">
+          <p th:text="|${student.firstName} ${student.lastName}|">Imie Nazwisko</p>
+          <a th:href="@{|${student.id}/oceny|}">Oceny</a>
+          <a th:href="@{|${student.id}/uwagi|}">Uwagi</a>
+      </div>
+
+  </main>
+</body>
+</html>

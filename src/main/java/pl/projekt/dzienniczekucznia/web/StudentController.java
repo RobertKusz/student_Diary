@@ -1,6 +1,7 @@
 package pl.projekt.dzienniczekucznia.web;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,11 +39,23 @@ public class StudentController {
     private String getStudentData(Model model,
                                @PathVariable Long id ){
         StudentDto student = studentService.getStudentById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        model.addAttribute("student", student);
+        model.addAttribute("allBehavioralNotes", studentService.getBehavioralNotes());
+        return "student-panel";
+    }
+    @GetMapping("/student/{id}/oceny")
+    private String getStudentGrades(Model model,
+                                  @PathVariable Long id ){
+        StudentDto student = studentService.getStudentById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         model.addAttribute("allGrades", gradeService.getGradeByStudentId(id));
         model.addAttribute("student", student);
         model.addAttribute("studentNumber",studentService.getUserNumber());
-        return "student";
+        model.addAttribute("allBehavioralNotes", studentService.getBehavioralNotes());
+
+
+
+        return "student-grades";
     }
 
 }

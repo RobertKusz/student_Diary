@@ -8,6 +8,25 @@
     <title>Dodawanie uwagi</title>
 </head>
 <body>
+<main layout:fragment="content">
+    <h1>Formularz dodawania oceny</h1>
+    <form action="#" th:action="@{/panel-nauczyciela/nowa-uwaga}" method="post" th:object="${behavioralNote}">
+
+        <label for="student">Wybierz ucznia:</label>
+        <select id="student" name="student">
+            <option th:each="student : ${students}" th:value="${student.id}" th:text="${student.firstName}"></option>
+        </select>
+        <br>
+        <label for="behavioralNode-description">Opis Uwagi</label>
+        <input type="text" id="behavioralNode-description" name="description" th:value="${behavioralNote.description}">
+
+        <label for="behavioralNode-teacher"></label>
+        <input type="hidden" name="teacher" id="behavioralNode-teacher" th:value="${authenticatedTeacher.id}">
+        <br>
+        <button type="submit">Dodaj uwage</button>
+    </form>
+</main>
+
 
 </body>
 </html>
