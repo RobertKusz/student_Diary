@@ -1,10 +1,34 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout}"
+>
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<main layout:fragment="content">
+
+
+    <div class="diary-content" style="margin-bottom: 10px; font-size: 2rem" >
+        <p>Opis uwagi</p>
+    </div>
+    <div class="diary-info" style="margin-bottom: 10px">
+        <p>Nauczyciel</p>
+
+    </div>
+    <div th:each="behavioralNote : ${behavioralNotes}">
+        <div class="diary-content" style="margin-bottom: 10px">
+            <p th:text="${behavioralNote.description}"></p>
+        </div>
+        <div class="diary-info" style="margin-bottom: 10px">
+            <p th:text="|${behavioralNote.teacher.firstName} ${behavioralNote.teacher.lastName}|"></p>
+
+        </div>
+    </div>
+
+</main>
 </body>
 </html>

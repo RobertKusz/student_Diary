@@ -9,6 +9,7 @@
     <include file="0003_create_table_student.xml" relativeToChangelogFile="true"/>
     <include file="0004_create_table_grade.xml" relativeToChangelogFile="true"/>
     <include file="0005_create_table_behavioralNote.xml" relativeToChangelogFile="true"/>
+    <include file="0006_create_table_exam.xml" relativeToChangelogFile="true"/>
 
 
     <include file="../testdata/0001_teacher.sql" relativeToChangelogFile="true" context="dev"/>
@@ -16,4 +17,5 @@
     <include file="../testdata/0003_student.sql" relativeToChangelogFile="true" context="dev"/>
     <include file="../testdata/0004_grade.sql" relativeToChangelogFile="true" context="dev"/>
     <include file="../testdata/0005_behavioralNote.sql" relativeToChangelogFile="true" context="dev"/>
+<!--    <include file="../testdata/0006_exam.sql" relativeToChangelogFile="true" context="dev"/>-->
 </databaseChangeLog>

@@ -1,19 +1,19 @@
 package pl.projekt.dzienniczekucznia.web.admin;
 
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.projekt.dzienniczekucznia.student.StudentService;
 import pl.projekt.dzienniczekucznia.student.dto.StudentRegistrationDto;
-import pl.projekt.dzienniczekucznia.subject.Subject;
 import pl.projekt.dzienniczekucznia.subject.SubjectService;
 import pl.projekt.dzienniczekucznia.subject.dto.SubjectDto;
 import pl.projekt.dzienniczekucznia.teacher.TeacherService;
 import pl.projekt.dzienniczekucznia.teacher.dto.TeacherRegistrationDto;
-
-import java.util.List;
 
 @Controller
 public class RegistrationController {
@@ -49,12 +49,21 @@ public class RegistrationController {
     }
 
     @PostMapping("/rejestracja/nauczyciel")
-    public String registerTeacher(TeacherRegistrationDto teacherRegistration, String subjectName){
+    public String registerTeacher(@Valid TeacherRegistrationDto teacherRegistration,
+                                  String subjectName,
+                                  BindingResult bindingResult,
+                                  Model model,
+                                  HttpSession session){
+        if (bindingResult.hasErrors()){
+            model.addAttribute("errors", bindingResult.getFieldError());
+            return "registration-teacher";
+        }
         teacherService.registerTeacher(teacherRegistration);
         if (!isExist(subjectName)){
             createNewSubject(subjectName);
         }
-        return "redirect:/";
+        session.setAttribute("info", "Rejestracja zakończona sukcesem! Możesz się teraz zalogować.");
+        return "redirect:/login";
     }
 
     @GetMapping("/rejestracja/uczen")
@@ -66,9 +75,11 @@ public class RegistrationController {
     }
     @PostMapping("/rejestracja/uczen")
     public String registerStudent(StudentRegistrationDto studentRegistration,
-                                  @RequestParam(value = "subject",required = false) Long[] selectedSubjectsIds){
+                                  @RequestParam(value = "subject",required = false) Long[] selectedSubjectsIds,
+                                  HttpSession session){
         studentService.registerStudent(studentRegistration, selectedSubjectsIds);
-        return "redirect:/";
+        session.setAttribute("info", "Rejestracja zakończona sukcesem! Możesz się teraz zalogować.");
+        return "redirect:/login";
     }
 
     private void createNewSubject(String subjectName) {

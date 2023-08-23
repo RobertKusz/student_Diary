@@ -7,16 +7,23 @@
 <body>
 <main layout:fragment="content">
     <form th:action="@{/login}" action="" method="post" >
+
         <p th:if="${param.error}"
         class="login-form-message"
         th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"></p>
+
         <p th:if="${param.logout}" class="login-form-message">
-            Zsotałeś wylogowany, możesz zalogować się ponownie.
+            Zotałeś wylogowany, możesz zalogować się ponownie.
         </p>
-      <input type="text" name="username" placeholder="login">
-      <input type="password" name="password" placeholder="hasło">
+
+        <p th:if="${session.info}" th:text="${session.info}" class="login-form-message">
+
+        </p>
+      <input type="text" name="username" placeholder="login" required>
+      <input type="password" name="password" placeholder="hasło" required>
       <button type="submit">Login</button>
       <p class="registration-link">Nie masz jeszcze konta? <a href="#" th:href="@{/rejestracja}">Zarejestruj się</a></p>
+        <br>
         <p>
             Uczeń: johny123  hasloJohn
         </p>

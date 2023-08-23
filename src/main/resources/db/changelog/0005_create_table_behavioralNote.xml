@@ -7,7 +7,7 @@
     <changeSet id="0" author="RobertKusz">
         <createTable tableName="behavioral_Note">
             <column name="id" type="BIGINT" autoIncrement="true">
-                <constraints nullable="false" primaryKey="false"/>
+                <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="teacher_id" type="BIGINT">
                 <constraints nullable="false"

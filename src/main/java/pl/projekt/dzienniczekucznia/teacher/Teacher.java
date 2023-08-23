@@ -1,6 +1,9 @@
 package pl.projekt.dzienniczekucznia.teacher;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import pl.projekt.dzienniczekucznia.subject.Subject;
 
 @Entity
@@ -8,11 +11,19 @@ public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
+    @Size(min = 2)
     private String firstName;
+    @NotEmpty
+    @Size(min = 2)
     private String lastName;
     @OneToOne (mappedBy = "teacher")
     private Subject subject;
+    @NotEmpty
+    @Size(min = 5)
     private String login;
+    @NotEmpty
+    @Size(min = 5)
     private String password;
 
 

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface TeacherRepository extends CrudRepository<Teacher, Long> {
-    Teacher getTeacherByLogin(String login);
+    Optional<Teacher> getTeacherByLogin(String login);
     long count();
     Optional<Teacher> getTeacherById(long id);
 

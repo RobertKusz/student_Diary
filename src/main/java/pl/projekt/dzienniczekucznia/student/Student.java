@@ -1,6 +1,9 @@
 package pl.projekt.dzienniczekucznia.student;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.Length;
 import pl.projekt.dzienniczekucznia.grades.Grade;
 import pl.projekt.dzienniczekucznia.subject.Subject;
 
@@ -11,11 +14,22 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName; // dodal login i hasło do uczni i nauczycieli zeby dało sie ich zidentyfikować przy logowaiu
-    private String lastName;
 
+    @NotEmpty
+    @Size(min=2)
+    private String firstName;
+    @NotEmpty
+    @Size(min=2)
+    private String lastName;
+    @NotEmpty
+    @Size(min=11)
     private String pesel;
+    @NotEmpty
+    @Size(min=5)
     private String login;
+
+    @NotEmpty
+    @Size(min=5)
     private String password;
 
     @OneToMany(mappedBy = "student")

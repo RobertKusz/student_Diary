@@ -7,8 +7,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.projekt.dzienniczekucznia.student.Student;
 import pl.projekt.dzienniczekucznia.student.StudentService;
-import pl.projekt.dzienniczekucznia.teacher.Teacher;
 import pl.projekt.dzienniczekucznia.teacher.TeacherService;
+import pl.projekt.dzienniczekucznia.teacher.dto.TeacherDto;
+
+import java.util.Optional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -22,18 +24,21 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        Student student = studentService.getStudentByLogin(login);
-        Teacher teacher = teacherService.getByLogin(login);
+    public UserDetails loadUserByUsername(String login) {
+        Optional<Student> student = studentService.getStudentByLogin(login);
+        Optional<TeacherDto> teacher = teacherService.getByLogin(login);
 
-        if (student != null){
-            return User.withUsername(student.getLogin())
-                    .password(student.getPassword())
+        if (student.isPresent()){
+            System.out.println("student");
+            return User.withUsername(student.get().getLogin())
+                    .password(student.get().getPassword())
                     .roles("STUDENT")
                     .build();
-        } else if (teacher != null) {
-            return User.withUsername(teacher.getLogin())
-                    .password(teacher.getPassword())
+
+        } else if (teacher.isPresent()) {
+            System.out.println("nauczyciel");
+            return User.withUsername(teacher.get().getLogin())
+                    .password(teacher.get().getPassword())
                     .roles("TEACHER")
                     .build();
         }else {

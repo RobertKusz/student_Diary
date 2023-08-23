@@ -4,7 +4,26 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="0" author="admin">
+    <changeSet id="0001" author="RobertKusz">
+        <createTable tableName="exam">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints unique="true" primaryKey="true"/>
+            </column>
+            <column name="date" type="DATE"/>
+            <column name="description" type="VARCHAR(500)"/>
+            <column name="teacher_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_exam_teacher_id"
+                             referencedTableName="teacher"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="subject_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_exam_subject_id"
+                             referencedTableName="subject"
+                             referencedColumnNames="id"/>
+            </column>
+        </createTable>
 
     </changeSet>
 </databaseChangeLog>

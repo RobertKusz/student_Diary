@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="https://www.thymeleaf.org"
-      layout:decorate="~{layout}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout}"
+>
 <head>
     <meta charset="UTF-8">
     <title>Dzienniczek ucznia</title>
@@ -11,10 +12,27 @@
   <main class="main_content" layout:fragment="content">
       <div class="diary-content">
           <h1>Dzień dobry
-              <span th:text="${principal}" sec:authorize="hasAnyRole('TEACHER','STUDENT')"></span>
-              <span sec:authorize="hasRole('TEACHER')">  miłej pracy</span>
-              <span sec:authorize="hasRole('STUDENT')">  miłej nauki</span>
+              <span th:text="|${teacher.firstName} miłej pracy|" sec:authorize="hasRole('TEACHER')"></span>
+              <span th:text="|${student.firstName} miłej nauki|" sec:authorize="hasRole('STUDENT')"></span>
           </h1>
+
+          <div sec:authorize="hasRole('TEACHER')" th:if="${examsByTeacher} ne null">
+          <h2>Nadchodzące sprawdziany z przedmiotu <span th:text="${teacher.subject.name}"></span>: </h2>
+              <div th:each="exam : ${examsByTeacher} ">
+                  <p th:text="${exam.date}"></p>
+                  <p th:text="${exam.description}"></p>
+              </div>
+          </div>
+
+          <div sec:authorize="hasRole('STUDENT')" th:if="${examsByStudent} ne null">
+          <h2>Nadchodzące sprawdziany: </h2>
+
+              <div th:each="exam : ${examsByStudent} ">
+                  <p th:text="${exam.date}"></p>
+                  <p th:text="${exam.subject.name}"></p>
+                  <p th:text="${exam.description}"></p>
+              </div>
+          </div>
 
       </div>
       <div class="diary-info">

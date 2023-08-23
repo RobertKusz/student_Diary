@@ -20,6 +20,7 @@ public class CustomSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests((auhtz) -> auhtz
                 .requestMatchers("/panel-nauczyciela/**").hasRole(TEACHER_ROLE)
+                .requestMatchers("/panel-nauczyciela/nowy-sprawdzian").hasRole(TEACHER_ROLE)
                 .requestMatchers("/usun/{gradeId}").hasRole(TEACHER_ROLE)
                 .requestMatchers("/spis-studentow").authenticated()
                 .requestMatchers("/student/**").authenticated()

@@ -8,6 +8,20 @@
     <title>Dodawanie sprawdzianu</title>
 </head>
 <body>
+<main layout:fragment="content">
+    <form th:action="@{/panel-nauczyciela/nowy-sprawdzian}" method="post" th:object="${exam}" >
+
+        <label for="dateString">Data sprawdzianu:</label>
+        <input type="date" id="dateString" name="dateString" required><br><br>
+
+        <label for="description">Opis sprawdzianu:</label><br>
+        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+
+        <input type="hidden" th:name="teacher" th:value="${teacher.id}">
+        <input type="hidden" th:name="subject" th:value="${teacher.subject.id}">
+        <input type="submit" value="Dodaj sprawdzian">
+    </form>
+</main>
 
 </body>
 </html>

@@ -3,6 +3,7 @@ package pl.projekt.dzienniczekucznia.teacher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.projekt.dzienniczekucznia.teacher.dto.TeacherDto;
 import pl.projekt.dzienniczekucznia.teacher.dto.TeacherRegistrationDto;
 
 import java.util.NoSuchElementException;
@@ -19,8 +20,8 @@ public class TeacherService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Teacher getByLogin(String login){
-        return teacherRepository.getTeacherByLogin(login);
+    public Optional<TeacherDto> getByLogin(String login){
+        return teacherRepository.getTeacherByLogin(login).map(TeacherDtoMapper::map);
     }
 
     @Transactional

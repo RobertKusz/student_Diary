@@ -12,6 +12,7 @@ import pl.projekt.dzienniczekucznia.subject.Subject;
 import pl.projekt.dzienniczekucznia.subject.SubjectDtoMapper;
 import pl.projekt.dzienniczekucznia.subject.SubjectService;
 import pl.projekt.dzienniczekucznia.subject.dto.SubjectDto;
+import pl.projekt.dzienniczekucznia.teacher.dto.TeacherDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,7 @@ public class StudentService {
         return studentRepository.findById(id)
                 .map(StudentDtoMapper::map);
     }
-    public Student getStudentByLogin(String login){
+    public Optional<Student> getStudentByLogin(String login){
      return studentRepository.findStudentByLogin(login);
     }
     @Transactional
@@ -55,6 +56,7 @@ public class StudentService {
         student.setFirstName(studentRegistration.getFirstName());
         student.setLastName(studentRegistration.getLastName());
         student.setLogin(studentRegistration.getLogin());
+        student.setPesel(studentRegistration.getPesel());
         student.setPassword(passwordEncoder.encode(studentRegistration.getPassword()));
         student.setSubjects(saveSubjects(subjectsId));
         studentRepository.save(student);
@@ -102,4 +104,8 @@ public class StudentService {
                 .toList();
     }
 
+    public Optional<StudentDto> getByLogin(String login) {
+        return studentRepository.getStudentByLogin(login).map(StudentDtoMapper::map);
+
+    }
 }
