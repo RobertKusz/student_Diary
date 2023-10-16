@@ -35,7 +35,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model){
-        long userNumber = studentService.getUserNumber();
         Optional<Double> temperatureOptional = weatherService.getWeatherTemperature();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -61,7 +60,7 @@ public class HomeController {
         } else {
             model.addAttribute("temperature", "Brak danych o temperaturze.");
         }
-        model.addAttribute("studentNumber", userNumber);
+        model.addAttribute("studentNumber");
         return "home-page";
     }
 }

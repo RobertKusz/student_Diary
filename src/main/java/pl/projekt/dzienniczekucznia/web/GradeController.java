@@ -16,13 +16,11 @@ import pl.projekt.dzienniczekucznia.teacher.Teacher;
 public class GradeController {
     private final StudentService studentService;
     private final GradeService gradeService;
-    private final SubjectService subjectService;
 
 
-    public GradeController(StudentService studentService, GradeService gradeService, SubjectService subjectService) {
+    public GradeController(StudentService studentService, GradeService gradeService) {
         this.studentService = studentService;
         this.gradeService = gradeService;
-        this.subjectService = subjectService;
     }
 
     @GetMapping("/student/{student_id}/grade/{grade_id}")

@@ -34,14 +34,21 @@ public class ExamService {
     }
 
     public List<ExamDto> getExamsByTeacherSubject(Subject subject) {
-        return examRepository.getExamsBySubject(subject).stream().map(ExamDtoMapper::map).toList();
+        return examRepository.getExamsBySubject(subject)
+                .stream()
+                .map(ExamDtoMapper::map)
+                .toList();
     }
+
     public List<ExamDto> getExamsByStudentSubject(List<Subject> subjects) {
         List<Exam> exams = new ArrayList<>();
         for (Subject subject : subjects) {
             exams.addAll(examRepository.getExamsBySubject(subject));
         }
-        return exams.stream().map(ExamDtoMapper::map).toList();
+        return exams
+                .stream()
+                .map(ExamDtoMapper::map)
+                .toList();
     }
 
 }

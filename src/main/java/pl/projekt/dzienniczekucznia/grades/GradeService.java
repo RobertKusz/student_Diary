@@ -8,10 +8,7 @@ import pl.projekt.dzienniczekucznia.student.StudentRepository;
 import pl.projekt.dzienniczekucznia.subject.Subject;
 import pl.projekt.dzienniczekucznia.subject.SubjectRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Service
@@ -29,9 +26,11 @@ public class GradeService {
     public Map<Long,Double> getAvgGrades(){
         List<Student> students = studentRepository.findAll();
             Map<Long,Double> avgGrads = new HashMap<>();
-             new ArrayList<>();
         for (Student student : students) {
-            List<Integer> studentGrades = gradeRepository.getGradeByStudent(student).stream().map(Grade::getGradeValue).toList();
+            List<Integer> studentGrades = gradeRepository.getGradeByStudent(student)
+                    .stream().
+                    map(Grade::getGradeValue).
+                    toList();
             avgGrads.put(student.getId(), getAvgFromList(studentGrades));
         }
         return avgGrads;
@@ -72,6 +71,5 @@ public class GradeService {
     @Transactional
     public void deleteGradeById(Long gradeId) {
         gradeRepository.deleteById(gradeId);
-        System.out.println(gradeId);
     }
 }

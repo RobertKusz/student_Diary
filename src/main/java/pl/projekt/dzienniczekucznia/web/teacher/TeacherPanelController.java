@@ -37,7 +37,9 @@ public class TeacherPanelController {
     private final BehavioralNoteService behavioralNoteService;
     private final ExamService examService;
 
-    public TeacherPanelController(StudentService studentService, GradeService gradeService, SubjectService subjectService, TeacherService teacherService, BehavioralNoteService behavioralNoteService, ExamService examService) {
+    public TeacherPanelController(StudentService studentService, GradeService gradeService,
+                                  SubjectService subjectService, TeacherService teacherService,
+                                  BehavioralNoteService behavioralNoteService, ExamService examService) {
         this.studentService = studentService;
         this.gradeService = gradeService;
         this.subjectService = subjectService;
