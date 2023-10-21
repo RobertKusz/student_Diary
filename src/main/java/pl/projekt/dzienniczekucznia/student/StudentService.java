@@ -62,11 +62,14 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    private List<Subject> saveSubjects(Long[] subjectsId) {
+    List<Subject> saveSubjects(Long[] subjectsId) {
         if (subjectsId == null)
             return null;
         List<SubjectDto> subjectsDto = changeSubjectIdToSubject(subjectsId);
-        return subjectsDto.stream().map(SubjectDtoMapper::map).toList();
+        return subjectsDto
+                .stream()
+                .map(SubjectDtoMapper::map)
+                .toList();
     }
 
     private List<SubjectDto> changeSubjectIdToSubject(Long[] subjectsId) {
@@ -105,7 +108,8 @@ public class StudentService {
     }
 
     public Optional<StudentDto> getByLogin(String login) {
-        return studentRepository.getStudentByLogin(login).map(StudentDtoMapper::map);
-
+        return studentRepository
+                .getStudentByLogin(login)
+                .map(StudentDtoMapper::map);
     }
 }
