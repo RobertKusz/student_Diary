@@ -21,7 +21,8 @@ public class TeacherService {
     }
 
     public Optional<TeacherDto> getByLogin(String login){
-        return teacherRepository.getTeacherByLogin(login).map(TeacherDtoMapper::map);
+        return teacherRepository.getTeacherByLogin(login)
+                .map(TeacherDtoMapper::map);
     }
 
     @Transactional
@@ -37,10 +38,12 @@ public class TeacherService {
 
     public long getNewTeacherId(){
         Optional<Teacher> lastTeacher = teacherRepository.findTopByOrderByIdDesc();
-        return lastTeacher.map(Teacher::getId).orElseThrow();
+        return lastTeacher.map(Teacher::getId)
+                .orElseThrow();
     }
 
     public Teacher getTeacherById(Long id){
-        return teacherRepository.getTeacherById(id).orElseThrow(()->new NoSuchElementException("Brak nauczyciela o danym id"));
+        return teacherRepository.getTeacherById(id)
+                .orElseThrow(()->new NoSuchElementException("Brak nauczyciela o danym id"));
     }
 }
