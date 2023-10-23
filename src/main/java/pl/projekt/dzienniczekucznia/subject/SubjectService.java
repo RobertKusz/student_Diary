@@ -30,7 +30,9 @@ public class SubjectService {
     }
 
     public SubjectDto getSubjectByName(String subjectName){
-        return subjectRepository.getSubjectByName(subjectName).map(SubjectDtoMapper::map).orElse(null);
+        return subjectRepository.getSubjectByName(subjectName)
+                .map(SubjectDtoMapper::map)
+                .orElse(null);
     }
 
     public void addNewSubject(String subjectName, long teacherId) {
